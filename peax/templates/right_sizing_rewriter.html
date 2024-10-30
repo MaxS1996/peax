@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <!--<link href="source-sans-3.css" rel="stylesheet">-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+
+    <title>{{ summary["report_type"] }}-Optimization of {{ summary["name"] }}</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+  </head>
+  <body>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col">
+          <h1>{{ summary["report_type"] }}-Rewrite of {{ summary["name"] }}</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <a href="summary.html#rewriters">go back</a>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;">
+        <div class="col-md-12">
+          <h2>Summary</h2>
+            The right-sizing rewriter tries to optimize the architecture for a 
+            given target by pruning deeper layers and attaching the classifier at a shallower location.
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;margin-bottom:20px;">
+        <div class="col-md-12">
+          <h2>Selected Solutions</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Attachment Location</th>
+                  <th scope="col">Accuracy</th>
+                  <th scope="col">MAC Footprint</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for location, (finetune_epochs, details) in summary["solutions"].items() %}
+                <tr>
+                  <td>{{location}} + {{finetune_epochs}} epochs</td>
+                  <td>{{ "%.2f"|format(details["accuracy"] * 100) }}%, <b>{{"%.2f"|format(details["relative"]["accuracy"]*100)}} %</b></td>
+                  <td>{{details["macs"]}}, <b>{{"%.2f"|format(details["relative"]["macs"]*100)}} %</b></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;margin-bottom:20px;">
+        <div class="col-md-12">
+          <h2>Scatter Plot</h2>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div id="scatter_plot" style="height:600px;"></div>
+          <script>
+            var trace1 = {
+              x: [
+              {% for x in summary["possible_x"]%}
+                {{x}},
+              {% endfor %}
+              ],
+              y: [
+              {% for x in summary["possible_y"]%}
+                {{x}},
+              {% endfor %}
+              ],
+              mode: 'markers',
+              type: 'scatter',
+              marker: {
+                color: '#FD7E14'
+              },
+              text: [
+              {% for x in summary["possible_labels"]%}
+                "{{x}}",
+              {% endfor %}],
+            };
+
+            var data = [trace1];
+
+            var layout = {
+              title: {
+                text:'Scatter Plot of possible Solutions',
+              },
+              xaxis: {
+                title: {
+                  text: 'Computational Footprint',
+                },
+              },
+              yaxis: {
+                title: {
+                  text: 'Accuracy',
+                }
+              }
+            };
+
+            Plotly.newPlot('scatter_plot', data, layout, {displaylogo: false});
+
+          </script>
+          
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;margin-bottom:20px;">
+        <div class="col-md-12">
+          <h2>Possible Solutions</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Attachment Location</th>
+                  <th scope="col">Accuracy</th>
+                  <th scope="col">MAC Footprint</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for location, option in summary["options"].items() %}
+                <tr>
+                  <td><b>{{location}}</b></td>
+                  <td>{{ "%.2f"|format(option["accuracy"] * 100) }}%, <b>{{"%.2f"|format(option["relative"]["accuracy"]*100)}} %</b></td>
+                  <td>{{option["macs"]}}, <b>{{"%.2f"|format(option["relative"]["macs"]*100)}} %</b></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer mt-auto bg-dark" style="width:100% !important;">
+      <div class="container text-center">
+        <span class="text-white">2024 PEAX · Performance Enhancing Adaptive eXecution</span>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+  </body>
+</html>

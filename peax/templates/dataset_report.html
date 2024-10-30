@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <!--<link href="source-sans-3.css" rel="stylesheet">-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+
+    <style>
+      /* Preserve whitespace and line breaks in the pre element */
+      pre {
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f7f7f7;
+        font-family: Consolas, Monaco, 'Courier New', Courier, monospace;
+      }
+  </style>
+
+    <title>DatasetReport for {{ summary["analysis_name"] }}</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+  </head>
+  <body>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Report on "{{ summary["name"] }}" Dataset</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a href="summary.html#reports">go back</a>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;">
+        <div class="col-md-12">
+          <h2>Summary</h2>
+            This report contains information about a Dataset, that has been used for a Toolkit project.
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;">
+        <div class="col-md-12">
+          <h2>Dataset</h2>
+          The dataset that was used for testing is located at {{summary["path"]}}.<br/>
+          The dataset has a size of {{summary["size"]}} samples.<br/>
+          After applying the preprocessing the input sample shape is {{summary["input_shape"]}}
+          and the output shape is {{summary["output_shape"]}}.
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;">
+        <div class="col-md-12">
+          <h2>Basic Information</h2>
+          <ul>
+            <li>Path: {{summary["path"]}}</li>
+            <li>Name: {{summary["name"]}}</li>
+            <li>Modality: {{summary["modality"]}}</li>
+            <li>Sample Preprocessing Step: {{summary["data_preprocessor_name"]}}</li>
+            <li>Label Preprocessing Step: {{summary["label_preprocessor_name"]}}</li>
+            <li>Size: {{summary["size"]}}</li>
+            <li>Input Shape: {{summary["input_shape"]}}</li>
+            <li>Output Shape: {{summary["output_shape"]}}</li>
+            <li>(DEBUG) is_cached?: {{summary["cached"]}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:50px;">
+        <div class="col-md-12">
+          <h2>Label Distribution</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div id="plot_distribution" ></div>
+          <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+          <script>
+            var x = [];
+            var y = [];
+            {% for idx, count in summary["label_distribution"] %}
+            x.push("{{ idx }}");
+            y.push({{ count }});
+            {% endfor %}
+
+            var trace = {
+              x: x,
+              y: y,
+              type: 'bar',
+              marker: {
+                color: '#FD7E14'
+              }
+            };
+
+            var layout = {
+              title: "Dataset Label Distribution"
+            };
+
+            Plotly.newPlot('plot_distribution', [trace], layout, {displaylogo: false});
+          </script>
+        </div>
+      </div>
+
+      {% if summary["data_preprocessor_source"] is not none %}
+      {% if summary["data_preprocessor_source"] | length > 0 %}
+      <div class="row" style="margin-top:50px;">
+        <div class="col">
+          <h2>Sample Preprocessing Steps</h2>
+          <pre><code class="python">
+{{summary["data_preprocessor_source"] | escape }}
+          </code></pre>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% if summary["label_preprocessor_source"] is not none %}
+      {% if summary["label_preprocessor_source"]| length > 0 %}
+      <div class="row" style="margin-top:50px;">
+        <div class="col">
+          <h2>Label Preprocessing Steps</h2>
+          <pre><code class="python">
+{{summary["label_preprocessor_source"] | escape }}
+          </code></pre>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+
+    </main>
+
+    <footer class="footer mt-auto bg-dark" style="width:100% !important;">
+      <div class="container text-center">
+        <span class="text-white">2024 PEAX · Performance Enhancing Adaptive eXecution</span>
+      </div>
+    </footer>
+
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  </body>
+</html>

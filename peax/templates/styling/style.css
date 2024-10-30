@@ -1,0 +1,97 @@
+/* Custom Bootstrap Colors */
+:root {
+  --primary-color: #E8590C; /* A vibrant orange */
+  --secondary-color: #FD7E14; /* A darker shade of orange */
+  --success-color: #28A745; /* A green color */
+  --danger-color:  #DC3545; /* A red color */
+  --warning-color: #FFC107; /* A yellow color */
+  --info-color: #20C997; /* A teal color */
+  --light-color: #FCFDFF; /* A very very light grey */
+  --dark-color: #343A40; /* A dark grey */
+}
+
+
+
+/* Update Bootstrap Classes */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* Update other Bootstrap classes as needed */
+
+/* Custom Styles */
+body {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+/* Style the nav link buttons */
+.nav-pills .nav-link {
+  color: var(--dark-color);
+}
+
+.nav-pills .nav-link.active{
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.nav-pills .nav-link:hover{
+  color: var(--light-color);
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* Style headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+}
+
+/* Style links */
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+
+/* Override Bootstrap Components */
+/* Example: Navbar */
+.navbar {
+  background-color: var(--primary-color);
+}
+
+.navbar .navbar-brand {
+  color: var(--light-color);
+}
+
+.navbar .nav-link {
+  color: var(--light-color);
+}
+
+.footer .text-muted {
+  color: var(--primary-color);
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+}
+.green {
+  background-color: var(--primary-color);
+}
+.red {
+  background-color: var(--danger-color);
+}
+
