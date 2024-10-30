@@ -21,3 +21,5 @@ When comparing microTVM and TensorFlow Lite for Microcontrollers, it's essential
   * Ahead-of-Time (AOT) Compilation: microTVM uses an ahead-of-time compilation strategy. Models are compiled into highly optimized, low-level C code tailored to the target microcontroller architecture before deployment.
   * Optimized Code Generation: The compilation process includes various optimizations such as operator fusion, loop unrolling, and hardware-specific tweaks to maximize performance and minimize resource usage.
   * Efficiency: AOT compilation generally results in faster execution and lower memory overhead compared to interpreter-based execution, as the model is directly translated into executable code.
+
+::: rewriters.compiler.micro_tvm

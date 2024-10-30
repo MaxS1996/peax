@@ -29,3 +29,5 @@ Steps that are not solved by PEAX:
 * **Interpreter Initialization**: When the microcontroller starts, the interpreter initializes by loading the model into memory. It uses an OpsResolver to map the model's operations (like convolutional and dense layers) to their corresponding implementations available on the device.
 * **Inference Execution**: During runtime, the interpreter takes in input data (such as sensor readings or images) and processes it through the model, step-by-step. For each operation defined in the model, the interpreter consults the OpsResolver to find and execute the appropriate implementation on the microcontroller. This allows the model to make predictions or decisions based on the input data.
 * **Output Generation**: Finally, the interpreter produces the output from the model, which can be utilized by the microcontroller to perform specific actions, like triggering an alert, adjusting a device setting, or logging data for further analysis.
+
+::: rewriters.compiler.tflite
