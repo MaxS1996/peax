@@ -1,1 +1,39 @@
 /.pytest_cache
+# Python files
+*.py[cod]
+*.egg-info/
+*.eggs/
+dist/
+build/
+report/
+test_summary/
+test_data/
+.*
+
+# Byte-compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# IPython
+.ipynb_checkpoints/
+
+# IDEs and editors
+*.swp
+*.swo
+*.swn
+
+# virtualenv
+venv/
+.venv/
+venv_windows/
+.venv_windows/
+venv*/
+env/
+.env/
+
+# vscode
+.vscode/*
+
+# mkdocs
+/site/*
