@@ -1,6 +1,6 @@
-# PEAX Framework: Enhancing Latency and Efficiency in Model Architectures
+# PEAX
 
-- [PEAX Framework: Enhancing Latency and Efficiency in Model Architectures](#peax-framework-enhancing-latency-and-efficiency-in-model-architectures)
+- [PEAX](#peax)
   - [Currently Implemented Rewrites](#currently-implemented-rewrites)
   - [Architecture](#architecture)
   - [TODOs:](#todos)
@@ -36,9 +36,6 @@ This feature allows PEAX to adapt your model to the specific requirements of you
 This rewrite is specifically designed for sensor data monitoring applications, allowing for more efficient processing by leveraging the correlation that is present within the data for its efficiency.
 * IFM-based Temporal Early Termination for Sensor Data Monitoring:
 This feature enables the model to exit early based on the Intermediate Feature Map (IFM), reducing the mean computational footprint and latency in sensor data monitoring applications.
-* Static Slimming:
-This rewriter creates multiple versions of the submitted model, their difference is the width (read: number of filters and neurons), while maintaining the prediction head (classification output).
-To minimize the cost of training these variants, weight transfers are employed between the submitted and slimmed versions.
 
 These rewrites, along with others, make PEAX a powerful tool for optimizing and enhancing the performance of your model architectures.
 

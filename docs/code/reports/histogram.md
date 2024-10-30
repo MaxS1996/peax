@@ -1,0 +1,1 @@
+There is something wrong with the docstrings in this class, they keep crashing mkdocs.

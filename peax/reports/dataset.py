@@ -581,8 +581,7 @@ class DatasetReport(base.Report):
         Creates a HTML-based summary of the information from this report
 
         Args:
-            folder_path (Union[str, pathlib.Path], optional): Folder in which the summary will be created,
-            uses the current working directory if None. Defaults to None.
+            folder_path (Union[str, pathlib.Path], optional): Folder in which the summary will be created, uses the current working directory if None. Defaults to None.
 
         Returns:
             Tuple[str, str]: Title for the link that can be created in the ModelAnalysis summary, and the path to the summary of this report
@@ -637,8 +636,7 @@ class DatasetReport(base.Report):
 
         Args:
             analysis (aNN.ModelAnalysis): The ModelAnalysis
-            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately.
-            Defaults to False.
+            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately. Defaults to False.
 
         Returns:
             DatasetReporterSubmitter: the auxiliary class that is used to simplify the submission process.

@@ -45,8 +45,7 @@ class HWReportSubmitter(base.ReportSubmitter):
 
         Args:
             analysis (aNN.ModelAnalysis): the ModelAnalysis instance to which the reporter will be assigned
-            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately.
-            Defaults to False.
+            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately. Defaults to False.
         """
         super().__init__(analysis, lazy)
 

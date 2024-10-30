@@ -23,8 +23,7 @@ class BatchSizeReportSubmitter(ReportSubmitter):
 
     Args:
         analysis (aNN.ModelAnalysis): the ModelAnalysis to which everything should be assigned
-        lazy (bool, optional): If True, only a reference to the future report will be returned,
-        otherwise the report will be created immediately. Defaults to False.
+        lazy (bool, optional): If True, only a reference to the future report will be returned, otherwise the report will be created immediately. Defaults to False.
     """
     super().__init__(analysis, lazy)
 
@@ -293,12 +292,15 @@ class BatchSizeReport(Report):
 
     return bs_report
   
-  def render_summary(self, folder_path: Union[str, pathlib.Path] = None):
+  def render_summary(self, folder_path: Union[str, pathlib.Path] = None) -> None:
     """
     This report will not render a summary, as it is just an auxiliary tool for the dataset and accuracy reports.
 
+    Args:
+        folder_path (Union[str, pathlib.Path], optional): The folder path where the summary shall be stored. Defaults to None.
+
     Returns:
-        None
+        None: THIS REPORT WILL NOT RETURN ANYTHING
     """
     return None
   
@@ -322,8 +324,7 @@ class BatchSizeReport(Report):
     Returns the constructor of a new instance of the class as object to enable passing it to the ModelAnalysis instance
 
     Args:
-        create_id (bool, optional): if True, a unique identifier for the instance than can be created 
-          from the constructor will be returned alongside the constructor. Defaults to True.
+        create_id (bool, optional): if True, a unique identifier for the instance than can be created from the constructor will be returned alongside the constructor. Defaults to True.
         start_size (int, optional): the minimum value for the batch size search. Defaults to 1.
         end_size (int, optional): the maximum value for the batch size search. Defaults to 4096.
     """

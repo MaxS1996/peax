@@ -680,7 +680,7 @@ class TemporalExitDecisionReport(base.Report):
 
 
 
-  def evaluate(self):
+  def evaluate(self) -> dict:
     """
     Performs the costly evaluation.
 
@@ -857,14 +857,15 @@ class TemporalExitDecisionReport(base.Report):
 
     return self.ee_performance
   
-  def render_summary(self, folder_path: Union[str, pathlib.Path] = None):
-    """Renders a HTML-based summary of the report. Used for interfacing with the human user
+  def render_summary(self, folder_path: Union[str, pathlib.Path] = None) -> Tuple[str, str]:
+    """
+    Renders a HTML-based summary of the report. Used for interfacing with the human user
 
     Args:
       folder_path (Union[str, pathlib.Path], optional): the path where the summary will be stored. Defaults to None.
 
     Returns:
-      _type_: _description_
+        Tuple[str, str]: title of the summary and its filename to enable other summaries to link to it.
     """
     _template_path = pathlib.Path(os.path.dirname(__file__)) / '..' / 'templates'
     if folder_path is None:
@@ -1006,9 +1007,8 @@ class TemporalExitDecisionReport(base.Report):
     syntactic sugar for the creation and submission of reports.
 
     Args:
-        analysis (aNN.ModelAnalysis): _description_
-        lazy (bool, optional): If True, only a reference to the future report will be returned,
-        otherwise the report will be created immediately. Defaults to False.
+        analysis (aNN.ModelAnalysis): the ModelAnalysis to which the Report will be submitted.
+        lazy (bool, optional): If True, only a reference to the future report will be returned, otherwise the report will be created immediately. Defaults to False.
 
     Returns:
         TemporalExitDecisionReportSubmitter: An auxiliary object to facilitate the syntax.
@@ -1022,7 +1022,6 @@ class TemporalExitDecisionReport(base.Report):
     _summary_
 
     Args:
-        name (str): the name of the ModelAnalysis to which the report is or will be associated.
         search_config (str): search configuration for the early exit branch architectures.
         calib_sequences (List[CalibrationSequence]): the used calibration sequences.
 

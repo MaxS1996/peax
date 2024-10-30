@@ -39,8 +39,7 @@ class AccuracyReportSubmitter(base.ReportSubmitter):
 
         Args:
             analysis (aNN.ModelAnalysis): the ModelAnalysis to which the reporter will be submitted
-            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately.
-            Defaults to False.
+            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately. Defaults to False.
         """
         super().__init__(analysis, lazy)
 
@@ -490,8 +489,9 @@ class AccuracyReport(base.Report):
         input_preprocessors: Union[callable, Iterable[callable]] = None,
         label_preprocessors: Union[callable, Iterable[callable]] = None,
         create_id:bool=True,
-    ):
-        """An additional way to create a closure for an AccuracyReport, if no DatasetReports have been created yet
+    ) -> Tuple[callable, Union[None, int]]:
+        """
+        An additional way to create a closure for an AccuracyReport, if no DatasetReports have been created yet
 
         Args:
             analysis (analysis.ModelAnalysis): the ModelAnalysis object to which the DatasetReports will be submitted
@@ -505,8 +505,7 @@ class AccuracyReport(base.Report):
             create_id (bool, optional): if a reference ID should be created. Defaults to True.
 
         Returns:
-            callable: The AccuracyReport closure
-            (optional) int: the unique ID for this closure
+            Tuple[callable, Union[None, int]]: The AccuracyReport closure and an optional unique ID for this closure
         """
         if isinstance(paths, Iterable):
             assert isinstance(names, Iterable), "if multiple dataset paths are submitted, a list for the names need to be provided as well"

@@ -1,5 +1,5 @@
 import pathlib
-from typing import Union, Dict
+from typing import Union, Dict, Tuple
 import json
 from typing import Set
 from typing_extensions import Self
@@ -52,8 +52,7 @@ class Report(ABC):
 
         Args:
             analysis (aNN.ModelAnalysis): the ModelAnalysis to which the reporter should be submitted
-            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately.
-            Defaults to False.
+            lazy (bool, optional): The submission behavior. lazy will only create the report if it is required, otherwise it will be generated immediately. Defaults to False.
 
         Returns:
             ReportSubmitter: returns a helper object which creates the reporter callable, submits it to the ModelAnalysis and returns the Report, if specified as non_lazy, otherwise just the reference to call its constructor will be returned.
@@ -61,19 +60,20 @@ class Report(ABC):
         return ReportSubmitter(analysis=analysis, lazy=lazy)
 
     @abstractmethod
-    def render_summary(self, folder_path: Union[str, pathlib.Path] = None):
-        """Renders a HTML-based summary of the report. Used for interfacing with the human user
+    def render_summary(self, folder_path: Union[str, pathlib.Path] = None) -> Tuple[str, str]:
+        """
+        Renders a HTML-based summary of the report. Used for interfacing with the human user
 
         Args:
             folder_path (Union[str, pathlib.Path], optional): the path where the summary will be stored. Defaults to None.
 
         Returns:
-            _type_: _description_
+            Tuple[str, str]: Will return the title and filename of the created summary.
         """
         return "base report", ""
 
     @abstractmethod
-    def dump(self, folder_path: Union[str, pathlib.Path] = None):
+    def dump(self, folder_path: Union[str, pathlib.Path] = None) -> Dict[str, object]:
         """dumps the report two the specified folder, might use different formats
         JSON is preferred, but can also rely on alternative formats if required
 
@@ -81,7 +81,7 @@ class Report(ABC):
             folder_path (Union[str, pathlib.Path], optional): the path where the serialization shall be dumped. Defaults to None.
 
         Returns:
-            _type_: _description_
+            Dict[str, object]: A serialized version of the report.
         """
         return None
     

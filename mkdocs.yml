@@ -1,0 +1,53 @@
+site_name: PEAX
+
+nav:
+- Home: index.md
+- About: about.md
+- Usage:
+  - Start: usage/index.md
+
+- Code:
+  - Overview: code/index.md
+  - Analysis:
+    - Overview: code/analysis/index.md
+    - ModelAnalysis: code/analysis/model_analysis.md
+    - ArchitectureAnalysis: code/analysis/arch_analysis.md
+    - ComputeAnalysis: code/analysis/compute_analysis.md
+    - MemoryAnalysis: code/analysis/mem_analysis.md
+    - StorageAnalysis: code/analysis/storage_analysis.md
+    - OptimizationQueue: code/analysis/optimization_queue.md
+  - Reports:
+    - Overview: code/reports/index.md
+    - AbstractBase: code/reports/base.md
+    - Accuracy: code/reports/accuracy.md
+    - BatchSize: code/reports/batch_size.md
+    - Dataset: code/reports/dataset.md
+    - EarlyExit: code/reports/early_exit.md
+    - HWCheck: code/reports/hw_check.md
+    - Histogram: code/reports/histogram.md
+    - Temporal: code/reports/temporal.md
+  - Rewriters:
+    - Overview: code/rewriters/index.md
+    - CompilerInterfaces:
+      - Overview: code/rewriters/compiler_interface/index.md
+      - TFLite (for Microcontrollers): code/rewriters/compiler_interface/tflm.md
+      - microTVM: code/rewriters/compiler_interface/mTVM.md
+  - Summary Functionality: code/summary.md
+
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [./peax]
+        options:
+          allow_inspection: false
+          show_source: true
+          show_root_heading: true
+          enable_inventory: true
+          docstring_style: google
+
+theme:
+  favicon: peax/templates/styling/icon.png
+  name: readthedocs
+  highlightjs: true

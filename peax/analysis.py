@@ -83,8 +83,7 @@ class RewriterQueue():
             rewriting_pass (callable): The function that performs the pass
             str_id (str): The unique identifier of the pass
             new_stage (bool, optional): If True, the pass will be added to a new stage in the queue. Defaults to False.
-            overwrite (bool, optional): If True, an existing pass with the same ID in the same stage will be overwritten.
-            Defaults to False.
+            overwrite (bool, optional): If True, an existing pass with the same ID in the same stage will be overwritten. Defaults to False.
         """
         if new_stage or self.stage_count == 0:
             self.add_stage()
@@ -108,8 +107,7 @@ class RewriterQueue():
             index (int): the stage to which the pass should be added.
             rewriting_pass (callable): The function that performs the pass
             str_id (str): The unique identifier of the pass
-            overwrite (bool, optional): If True, an existing pass with the same ID in the same stage will be overwritten.
-            Defaults to False.
+            overwrite (bool, optional): If True, an existing pass with the same ID in the same stage will be overwritten. Defaults to False.
 
         Raises:
             IndexError: If the index is larger than the queue length.
@@ -674,8 +672,7 @@ class ComputeAnalysis(PartialAnalysis):
             FileNotFoundError: raises an error, if the necessary files could not be found
 
         Args:
-            folder_path (Union[str, pathlib.Path], optional): The folder to which the data is supposed to be dumped. Defaults to None.
-            Uses current working directory if no folder_path is given.
+            folder_path (Union[str, pathlib.Path], optional): The folder to which the data is supposed to be dumped. Defaults to None. Uses current working directory if no folder_path is given.
         """
 
         if folder_path is None:
@@ -827,7 +824,7 @@ class MemoryAnalysis(PartialAnalysis):
         folder_path: Union[str, pathlib.Path] = None,
         bar: bool = True,
         pie: bool = True,
-    ):
+    ) -> None:
         """This function visualizes the required operations per layer for the analyzed model.
         The figures will be written as png files to the given folder path
 
@@ -837,7 +834,7 @@ class MemoryAnalysis(PartialAnalysis):
             pie (bool, optional): if a bar chart should be created. Defaults to True.
 
         Returns:
-            None
+            None (NoneType)
         """
         if folder_path is None:
             folder_path = pathlib.Path.cwd()
@@ -895,8 +892,7 @@ class MemoryAnalysis(PartialAnalysis):
 
 
         Args:
-            folder_path (Union[str, pathlib.Path], optional): the destination folder for the dumped data. Defaults to None.
-            If folder_path is None, the current working directory is used.
+            folder_path (Union[str, pathlib.Path], optional): the destination folder for the dumped data. Defaults to None. If folder_path is None, the current working directory is used.
         """
 
         summary = {
@@ -1025,7 +1021,7 @@ class StorageAnalysis(PartialAnalysis):
         folder_path: Union[str, pathlib.Path] = None,
         bar: bool = True,
         pie: bool = True,
-    ):
+    ) -> None:
         """Visualizes the storage allocation per layer as charts
 
         Args:
@@ -1092,8 +1088,7 @@ class StorageAnalysis(PartialAnalysis):
         parameters per layer and the version string of the used StorageAnalysis class
 
         Args:
-            folder_path (Union[str, pathlib.Path], optional): The folder in which the data is going to be dumped. Defaults to None.
-            Uses the current working directory if no folder_path is given.
+            folder_path (Union[str, pathlib.Path], optional): The folder in which the data is going to be dumped. Defaults to None. Uses the current working directory if no folder_path is given.
         """
 
         summary = {
