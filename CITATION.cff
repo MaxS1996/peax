@@ -1,0 +1,49 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: PEAX
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Max
+    family-names: Sponner
+    name-particle: Max
+    email: max@sponner.eu
+    affiliation: Infineon Technologies Dresden GmbH & Co. KG
+    orcid: 'https://orcid.org/0000-0002-4830-9440'
+repository-code: 'https://github.com/MaxS1996/peax'
+abstract: >-
+  Our PEAX Framework is a framework designed to optimize the
+  latency and efficiency of your trained model architecture
+  for embedded platforms. By incorporating various rewrites,
+  PEAX enhances the latency and efficiency of your model,
+  with a focus on adaptive inference techniques such as
+  Early Exit Neural Networks.
+
+
+  What sets PEAX apart from Deep Learning compilers like
+  TVM, Glow, or the TFLite converter is its unique ability
+  to significantly modify the network architecture and
+  perform training steps for finetuning or retraining the
+  altered parts of the model. This adaptability ensures that
+  your model maintains high prediction performance while
+  significantly improving its computational and latency
+  footprint.
+
+
+  A pioneering feature of PEAX is its automatic application
+  of (adaptive) techniques. These techniques are capable of
+  substantially reducing the resource footprint of inference
+  without permanently compromising the prediction quality.
+  This innovation allows PEAX to deliver high-performance
+  models that are both efficient and reliable, making it the
+  ideal choice for a wide range of applications, without
+  need for expert knowledge on how to apply these methods to
+  the model.
+keywords:
+  - adaptive deep learning
+  - embedded deep learning
+license: MIT
